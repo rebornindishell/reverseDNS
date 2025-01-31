@@ -1,9 +1,11 @@
 #!/bin/bash
 
-for i in {1..255}
-do
-echo "192.168.0.$i" >> ipRange
-done
+if [ -z "$1" ]
+then
+      echo "please enter an ip range"
+else
+nmap -sn $1 -Pn | grep report | awk {'print $NF'}| sed 's/(\|)//g' >> iprange
+
 # replace the ip with your desired value, replace /modify CIDR accordingly.
 #list of ips generated in ipRange file.
 #####################################################################
